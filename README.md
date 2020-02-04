@@ -1,3 +1,3 @@
 # Mi primer proyecto java
 
-Este es mi primer proyecto
+Proyecto de java usando git
