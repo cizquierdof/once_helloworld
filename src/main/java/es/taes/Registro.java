@@ -51,15 +51,15 @@ public class Registro {
         System.out.println("Apellido:");
         this.setApellidos(s.nextLine());
         System.out.println("Edad:");
-        this.setEdad(s.nextInt());
+        this.setEdad(Integer.parseInt( s.nextLine()));
         //TODO: añadir comprobación de que la entrada es válida
     
-        s.close();
+        //s.close();
            
       }
 
       public String insertQuery(){
-          return "INSERT ignore INTO Employees VALUES('"
+          return "INSERT INTO Employees (first, last, age) VALUES('"
                     +this.nombre+"','"
                     +this.apellidos+"', "
                     +this.edad+") ";
