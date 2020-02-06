@@ -26,7 +26,11 @@ public class App {
         boolean salir=false;
         Connection conn = null;
         Statement stmt = null;
-
+ // Register JDBC driver
+ Class.forName(JDBC_DRIVER);
+System.out.println("Connecting to database...");
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
         Registro reg=new Registro();
 
         //consulta al usuario si quiere añadir empleados
@@ -37,11 +41,9 @@ public class App {
         if(entrada=="s"){
           reg.addRegistro();  //recopila registro
            // Open a connection
-        System.out.println("Connecting to database...");
-        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        
 
-                // Register JDBC driver
-                Class.forName(JDBC_DRIVER);
+               
 
         
         stmt.executeUpdate(reg.insertQuery());  //inserta el registro
@@ -52,7 +54,7 @@ public class App {
        
         // Execute a query
         System.out.println("Creating statement...");
-        stmt = conn.createStatement();
+        
         String sql;
         sql = "SELECT id, first, last, age FROM Employees";
 
