@@ -1,6 +1,8 @@
 package es.taes;
 
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,38 +15,48 @@ public class App {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.jdbc2.optional.MysqlDataSource";
-    static final String DB_URL = "jdbc:mysql://iprocuratio.com:3333/test_jdbc";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/carlos";
 
     // Database credentials
     static final String USER = "root";
-    static final String PASS = "once012020";
+    static final String PASS = "root";
 
     public static void main(String[] args) throws Exception {
-        String miMensaje = "Mi hola mundo";
-        System.out.println(miMensaje);
-
-        Persona persona = new Persona();
-        persona.setEdad(45);
-        persona.setNombre("Alfonso");
-        System.out.println(persona);
-
+        Scanner scn = new Scanner(System.in);
+        boolean salir=false;
         Connection conn = null;
         Statement stmt = null;
 
-        // Register JDBC driver
-        Class.forName(JDBC_DRIVER);
+        Registro reg=new Registro();
 
-        // Open a connection
+        //consulta al usuario si quiere añadir empleados
+        //continua ñadiendo empleados hasta que le diga que no
+        do{
+        System.out.println("¿Añadir nuevo empeado? s/n");
+        String entrada=scn.nextLine().toLowerCase();
+        if(entrada=="s"){
+          reg.addRegistro();  //recopila registro
+           // Open a connection
         System.out.println("Connecting to database...");
         conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+                // Register JDBC driver
+                Class.forName(JDBC_DRIVER);
+
+        
+        stmt.executeUpdate(reg.insertQuery());  //inserta el registro
+
+        }while(salir)
+
+
+       
         // Execute a query
         System.out.println("Creating statement...");
         stmt = conn.createStatement();
         String sql;
         sql = "SELECT id, first, last, age FROM Employees";
-        stmt.executeUpdate(
-                "CREATE TABLE if not exists Employees ( id INT(11) PRIMARY KEY, first VARCHAR(256),  last VARCHAR(256),age INTEGER)");
-        stmt.executeUpdate("INSERT ignore INTO Employees VALUES(1,'Jack','Smith', 100) ");
+
+        
 
         ResultSet rs = stmt.executeQuery(sql);
 
@@ -66,5 +78,10 @@ public class App {
       stmt.close();
       conn.close();
 
-    }
+    } while(salir);
+
+    scn.close();
+  }
+
+
 }
