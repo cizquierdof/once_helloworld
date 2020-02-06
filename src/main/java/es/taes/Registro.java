@@ -51,11 +51,29 @@ public class Registro {
         System.out.println("Apellido:");
         this.setApellidos(s.nextLine());
         System.out.println("Edad:");
-        this.setEdad(Integer.parseInt( s.nextLine()));
+        String str=s.nextLine();
+        this.setEdad(Integer.parseInt( str));
         //TODO: añadir comprobación de que la entrada es válida
     
-        //s.close();
-           
+      }
+
+      public String  borraRegistro(){
+          Scanner scn=new Scanner(System.in);
+
+          System.out.println(AnsiColors.RED_BACKGROUND+AnsiColors.WHITE+ 
+                            "BORRAR REGISTRO"+AnsiColors.RESET);
+          System.out.println("Id:");
+          String id=scn.nextLine();
+          System.out.println(AnsiColors.RED_BACKGROUND+
+                                AnsiColors.WHITE+
+                                "¿BORRAR REGISTRO "+id+"? "+
+                                AnsiColors.RESET);
+            if(scn.nextLine().toLowerCase().equals("s")){
+
+                System.out.println("Registro "+ id+" borrado");
+            } else id="";
+            return id;
+
       }
 
       public String insertQuery(){

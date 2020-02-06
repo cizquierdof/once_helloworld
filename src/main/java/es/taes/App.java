@@ -11,6 +11,7 @@ import java.sql.ResultSet;
  *
  */
 public class App {
+ 
 
   // JDBC driver name and database URL
   static final String JDBC_DRIVER = "com.mysql.jdbc.jdbc2.optional.MysqlDataSource";
@@ -42,7 +43,7 @@ public class App {
     // continua añadiendo empleados hasta que le diga que no
     do {
 
-      System.out.println("Indica operación: /n: nuevo empleado /l: lista empleados /s: salir");
+      System.out.println("Indica operación: /n: nuevo empleado /l: lista empleados /b: borra /s: salir");
       System.out.println();
       String entrada = scn.nextLine().toLowerCase();
 
@@ -50,7 +51,6 @@ public class App {
       case "n": // añade registro
         reg.addRegistro(); // implementa datos registro
         query = reg.insertQuery();
-        // System.out.println(qry);
         stmt.executeUpdate(query); // inserta el registro
         break;
       case "l": // lista registros
@@ -71,6 +71,12 @@ public class App {
         }
         rs.close();
         break;
+      case "b":
+        String s= reg.borraRegistro();
+        if(s!=""){
+          stmt.executeUpdate("DELETE FROM employees WHERE id="+s);
+        }
+        break;
       case "s":
         salir = false;
         break;
@@ -80,10 +86,9 @@ public class App {
 
     } while (salir);
 
-//clear environment
+    // clear environment
     stmt.close();
     conn.close();
-    //scn.close();
   }
 
 }
