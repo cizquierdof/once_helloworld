@@ -43,8 +43,12 @@ public class App {
     // continua añadiendo empleados hasta que le diga que no
     do {
 
-      System.out.println("Indica operación: /n: nuevo empleado /l: lista empleados /b: borra /s: salir");
-      System.out.println();
+      System.out.println("Indica operación:    ");
+      System.out.println("\t n: nuevo empleado");
+      System.out.println("\t l: lista empleados");
+      System.out.println("\t b: borra empleado");
+      System.out.println("\t s: salir");
+      System.out.print("> ");
       String entrada = scn.nextLine().toLowerCase();
 
       switch (entrada) {
@@ -81,6 +85,8 @@ public class App {
         salir = false;
         break;
       default:
+      System.out.println(AnsiColors.WHITE_BACKGROUND+AnsiColors.BLACK+
+                          "Opción no válida"+AnsiColors.RESET);
         break;
       }
 
