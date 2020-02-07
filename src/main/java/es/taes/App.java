@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Hello world!
@@ -28,12 +29,18 @@ public class App {
     Connection conn = null;
     Statement stmt = null;
 
-    // Register JDBC driver and create connection
-    Class.forName(JDBC_DRIVER);
+    try {
+      Class.forName(JDBC_DRIVER);
     System.out.println("Connecting to database...");
     conn = DriverManager.getConnection(DB_URL, USER, PASS);
     System.out.println("Creating statement...");
     stmt = conn.createStatement();
+    } catch (SQLException e) {
+      System.out.println("Error al conectar con la base de datos");
+      return;
+    }
+    // Register JDBC driver and create connection
+    
 
     String query = "";
 
