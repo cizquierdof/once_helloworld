@@ -46,11 +46,11 @@ public class Registro {
         Scanner s=new Scanner(System.in);
            
         System.out.println("Introduce los datos del nuevo empleado.");
-        System.out.println("Nombre:");
+        System.out.print("Nombre: ");
         this.setNombre(s.nextLine());
-        System.out.println("Apellido:");
+        System.out.print("Apellido: ");
         this.setApellidos(s.nextLine());
-        System.out.println("Edad:");
+        System.out.print("Edad: ");
         String str=s.nextLine();
         this.setEdad(Integer.parseInt( str));
         //TODO: añadir comprobación de que la entrada es válida
